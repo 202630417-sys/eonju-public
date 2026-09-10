@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>슬기로운 조퇴 생활 - 조퇴 방법 추천</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .icon-header {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        p.subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .result-card {
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 15px;
+            padding: 25px 20px;
+            margin-bottom: 30px;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .result-category {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background-color: #e2e8f0;
+            color: #475569;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .result-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .result-desc {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.5;
+            word-break: keep-all;
+        }
+
+        .btn-recommend {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-recommend:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-recommend:active {
+            transform: translateY(0);
+        }
+
+        .disclaimer {
+            margin-top: 25px;
+            font-size: 11px;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        /* 흔들림(shake) 애니메이션 */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        .shaking {
+            animation: shake 0.3s infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="icon-header">🏃‍♂️💨</div>
+        <h1>슬기로운 조퇴 생활</h1>
+        <p class="subtitle">오늘따라 너무 집에 가고 싶은 당신을 위한<br>맞춤형 조퇴 명분 추천기</p>
+
+        <div class="result-card" id="resultCard">
+            <span class="result-category" id="resultCategory">눌러보세요</span>
+            <div class="result-title" id="resultTitle">버튼을 눌러 조퇴 방법을 추천받으세요!</div>
+            <div class="result-desc" id="resultDesc">당신에게 꼭 맞는 완벽한 조퇴 핑계를 찾아드립니다.</div>
+        </div>
+
+        <button class="btn-recommend" id="btnRecommend" onclick="recommendEarlyLeave()">🎲 조퇴방법 추천받기</button>
+
+        <p class="disclaimer">
+            ※ 주의: 본 웹사이트에서 제공하는 조퇴 핑계 사용으로 인한 모든 책임은 본인에게 있습니다.
+        </p>
+    </div>
+
+    <script>
+        // 조퇴 핑계 데이터 배열
+        const reasons = [
+            {
+                category: "건강형",
+                title: "갑작스러운 식체 / 급체",
+                desc: "아침/점심에 먹은 음식 체했다고 배를 움켜쥐며 말씀드리기. 이마에 손을 올리며 연기력 발휘 필수!"
+            },
+            {
+                category: "건강형",
+                title: "갑작스러운 두통 / 편두통",
+                desc: "컴퓨터 화면이나 책을 볼 수 없을 정도로 관자놀이가 찌릿하다고 하기. 눈을 약간 찌푸리고 힘없는 목소리가 포인트."
+            },
+            {
+                category: "건강형",
+                title: "치과 긴급 진료 (신경통)",
+                desc: "갑자기 잇몸이 부어오르고 치통이 극심해 당일 예약 가능한 치과로 바로 가야 한다고 호소하기."
+            },
+            {
+                category: "가정/생활형",
+                title: "집안 긴급 수리 (누수 / 가스)",
+                desc: "아파트 관리사무소나 집주인에게 연락이 와서 '아래층에 물이 샌다'거나 '가스 점검/누출 위험'으로 당장 확인이 필요하다고 하기."
+            },
+            {
+                category: "가정/생활형",
+                title: "가전제품 / 가구 방문 기사님 수리",
+                desc: "냉장고/세탁기 고장으로 당일 기사님 방문 시간이 지금밖에 안 된다며 부득이하게 조퇴 요청하기."
+            },
+            {
+                category: "행정/서류형",
+                title: "동주민센터 / 은행 긴급 업무",
+                desc: "대출 신청, 인감 증명서 발급 등 '운영 시간 내 방문 필수'인 중요 서류 제출 건이 있어 마감 전에 가야 한다고 하기."
+            },
+            {
+                category: "반려동물형",
+                title: "반려동물 긴급 병원 방문",
+                desc: "집에 있는 강아지/고양이가 갑자기 구토를 하거나 아프다는 가족의 연락을 받았다며 불안한 기색으로 말씀드리기."
+            },
+            {
+                category: "솔직/돌직구형",
+                title: "솔직하게 번아웃 고백",
+                desc: "오늘 집중력이 너무 떨어져서 남은 시간 계속 있는 것보다 조퇴 후 내일 최선의 컨디션으로 임하겠다고 진솔하게 말하기."
+            }
+        ];
+
+        // 버튼 클릭 시 호출되는 함수
+        function recommendEarlyLeave() {
+            const card = document.getElementById('resultCard');
+            const categoryEl = document.getElementById('resultCategory');
+            const titleEl = document.getElementById('resultTitle');
+            const descEl = document.getElementById('resultDesc');
+            const btn = document.getElementById('btnRecommend');
+
+            // 흔들림 효과 부여
+            card.classList.add('shaking');
+            btn.disabled = true;
+            btn.innerText = "추천 이유 찾는 중...";
+
+            setTimeout(() => {
+                // 랜덤 항목 선택
+                const randomIndex = Math.floor(Math.random() * reasons.length);
+                const selected = reasons[randomIndex];
+
+                // 내용 업데이트
+                categoryEl.innerText = selected.category;
+                titleEl.innerText = selected.title;
+                descEl.innerText = selected.desc;
+
+                // 스타일 업데이트 (선택 후 배경색 연하게 강조)
+                card.style.borderColor = "#3b82f6";
+                card.style.backgroundColor = "#eff6ff";
+
+                // 애니메이션 제거 및 버튼 복구
+                card.classList.remove('shaking');
+                btn.disabled = false;
+                btn.innerText = "🎲 다른 조퇴방법 추천받기";
+            }, 400); // 0.4초 후 결과 표시
+        }
+    </script>
+</body>
+</html>
