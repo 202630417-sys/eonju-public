@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>슬기로운 조퇴 생활 v7.0 (선택지 이미지 패치)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f1f5f9 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px 10px;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 28px 22px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .header-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 15px;
+        }
+        h1 {
+            color: #1e293b;
+            margin-bottom: 6px;
+            font-size: 22px;
+        }
+        .sub-title {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .form-group {
+            text-align: left;
+            position: relative;
+        }
+        .form-group.full {
+            grid-column: span 2;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            color: #334155;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+        .option-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 6px 10px;
+            transition: all 0.2s;
+        }
+        .option-card:focus-within {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+        .preview-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        select {
+            width: 100%;
+            padding: 8px 4px;
+            border: none;
+            background: transparent;
+            font-size: 13px;
+            outline: none;
+            color: #1e293b;
+            font-weight: 500;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 18px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: none;
+            text-align: left;
+        }
+        .result-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+        .badges {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            font-weight: bold;
+            font-size: 11px;
+            border-radius: 20px;
+        }
+        .badge-rate { background: #dbeafe; color: #1e40af; }
+        .badge-risk { background: #fee2e2; color: #991b1b; }
+        .badge-exam { background: #fef3c7; color: #92400e; }
+        .result-title {
+            font-weight: bold;
+            color: #0f172a;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .result-desc {
+            color: #334155;
+            font-size: 13.5px;
+            line-height: 1.5;
+        }
+        .tip-box {
+            margin-top: 12px;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #475569;
+            border-left: 4px solid #3b82f6;
+        }
+        .warning {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 상단 대표 메인 이미지 -->
+        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop&q=80" alt="조퇴 메인" class="header-img">
+        
+        <h1>슬기로운 조퇴 생활 v7.0</h1>
+        <p class="sub-title">선택지별 실시간 이미지 미리보기 지원</p>
+
+        <div class="form-grid">
+            <!-- 1. 시험 일정 -->
+            <div class="form-group full">
+                <label for="examPeriod">📝 학업 / 시험 일정 상태</label>
+                <div class="option-card">
+                    <img id="img_examPeriod" src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=100&auto=format&fit=crop&q=80" class="preview-img" alt="미리보기">
+                    <select id="examPeriod" onchange="updatePreview('examPeriod')">
+                        <option value="none" data-img="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=100&auto=format&fit=crop&q=80">평상시 (특별한 일정 없음)</option>
+                        <option value="before_exam" data-img="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=100&auto=format&fit=crop&q=80">시험 직전 주간 (학습 집중 기간)</option>
+                        <option value="exam_day" data-img="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=80">🚨 시험 진행 당일 (성적 직결)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 2. 조퇴 기간 -->
+            <div class="form-group full">
+                <label for="duration">⏱️ 조퇴 기간 / 시간 분량</label>
+                <div class="option-card">
+                    <img id="img_duration" src="https://images.unsplash.com/photo-1508962914676-134849a727f0?w=100&auto=format&fit=crop&q=80" class="preview-img" alt="미리보기">
+                    <select id="duration" onchange="updatePreview('duration')">
+                        <option value="short" data-img="https://images.unsplash.com/photo-1508962914676-134849a727f0?w=100&auto=format&fit=crop&q=80">1~2시간만 일찍 조퇴 (단기)</option>
+                        <option value="half" data-img="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&auto=format&fit=crop&q=80">반나절 / 오후 전체 조퇴 (중기)</option>
+                        <option value="multi" data-img="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=100&auto=format&fit=crop&q=80">오늘 조퇴 + 내일/모레까지 (장기)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 3. 나의 상태 -->
+            <div class="form-group full">
+                <label for="myState">😷 나의 현재 상태</label>
+                <div class="option-card">
+                    <img id="img_myState" src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=100&auto=format&fit=crop&q=80" class="preview-img" alt="미리보기">
+                    <select id="myState" onchange="updatePreview('myState')">
+                        <option value="sick_real" data-img="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=100&auto=format&fit=crop&q=80">진짜 몸이 아픔 (발열/몸살/복통)</option>
+                        <option value="sick_acting" data-img="https://images.unsplash.com/photo-1516585117208-c840fdd3c847?w=100&auto=format&fit=crop&q=80">연기 가능 (갑작스러운 통증/두통)</option>
+                        <option value="mental" data-img="https://images.unsplash.com/photo-1508672019048-805479767513?w=100&auto=format&fit=crop&q=80">정신적 피로 / 멘탈 탈곡</option>
+                        <option value="urgent" data-img="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=100&auto=format&fit=crop&q=80">급한 개인/가정사 (수리/가족)</option>
+                        <option value="hospital" data-img="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=100&auto=format&fit=crop&q=80">특정 진료/검사 (치과/안과 등)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 4. 선생님 기분 -->
+            <div class="form-group full">
+                <label for="bossMood">😈 선생님/상사 성향 및 기분</label>
+                <div class="option-card">
+                    <img id="img_bossMood" src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=100&auto=format&fit=crop&q=80" class="preview-img" alt="미리보기">
+                    <select id="bossMood" onchange="updatePreview('bossMood')">
+                        <option value="angel" data-img="https://images.unsplash.com/photo-1544717305-2782549b5136?w=100&auto=format&fit=crop&q=80">천사형 (흔쾌히 보내줌)</option>
+                        <option value="strict" data-img="https://images.unsplash.com/photo-1450133064473-71024230f91b?w=100&auto=format&fit=crop&q=80">원칙주의형 (깐깐함/증빙 필수)</option>
+                        <option value="empathy" data-img="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80">공감형 (개인사정 잘 들어줌)</option>
+                        <option value="bad" data-img="https://images.unsplash.com/photo-1541199249251-f713e6145474?w=100&auto=format&fit=crop&q=80">저기압 / 건드리면 안 됨</option>
+                        <option value="suspicious" data-img="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80">의심병형 (일단 의심함)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 5. 요일 -->
+            <div class="form-group">
+                <label for="dayOfWeek">📅 요일</label>
+                <div class="option-card">
+                    <img id="img_dayOfWeek" src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=100&auto=format&fit=crop&q=80" class="preview-img" alt="미리보기">
+                    <select id="dayOfWeek" onchange="updatePreview('dayOfWeek')">
+                        <option value="mon" data-img="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=100&auto=format&fit=crop&q=80">월요일</option>
+                        <option value="mid" data-img="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=100&auto=format&fit=crop&q=80">화~목요일</option>
+                        <option value="fri" data-img="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=100&auto=format&fit=crop&q=80">금요일</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 6. 증빙자료 -->
+            <div class="form-group">
+                <label for="docProof">📄 증빙자료</label>
+                <div class="option-card">
+                    <img id="img_docProof" src="https://images.unsplash.com/photo-1450133064473-71024230f91b?w=100&auto=format&fit=crop&q=80" class="preview-img" alt="미리보기">
+                    <select id="docProof" onchange="updatePreview('docProof')">
+                        <option value="yes" data-img="https://images.unsplash.com/photo-1450133064473-71024230f91b?w=100&auto=format&fit=crop&q=80">증빙 가능</option>
+                        <option value="no" data-img="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=80">증빙 없음</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="recommendReason()">맞춤형 조퇴 분석하기</button>
+
+        <div id="resultBox" class="result-box">
+            <img id="resultImg" src="" alt="상황 이미지" class="result-img">
+            <div class="badges">
+                <span id="rateBadge" class="badge badge-rate">성공 확률 80%</span>
+                <span id="examBadge" class="badge badge-exam">시즌: 평상시</span>
+                <span id="riskBadge" class="badge badge-risk">의심 위험도: 보통</span>
+            </div>
+            <div id="resultTitle" class="result-title">추천 핑계 전략</div>
+            <div id="resultDesc" class="result-desc">추천 멘트</div>
+            <div id="resultTip" class="tip-box">💡 행동 팁</div>
+        </div>
+
+        <p class="warning">
+            ※ 주의: 본 웹사이트에서 제공하는 조퇴 핑계 사용으로 인한 모든 책임은 본인에게 있습니다.
+        </p>
+    </div>
+
+    <script>
+        // 드롭다운 변경 시 옆의 썸네일 이미지 업데이트
+        function updatePreview(id) {
+            const select = document.getElementById(id);
+            const selectedOption = select.options[select.selectedIndex];
+            const imgSrc = selectedOption.getAttribute('data-img');
+            document.getElementById('img_' + id).src = imgSrc;
+        }
+
+        function recommendReason() {
+            const exam = document.getElementById("examPeriod").value;
+            const duration = document.getElementById("duration").value;
+            const state = document.getElementById("myState").value;
+            const mood = document.getElementById("bossMood").value;
+            const day = document.getElementById("dayOfWeek").value;
+            const doc = document.getElementById("docProof").value;
+
+            let rate = 85;
+            let risk = "보통";
+            let examText = "평상시";
+            let title = "";
+            let desc = "";
+            let tip = "";
+
+            // 현재 선택된 '나의 상태'의 이미지를 결과 대표 이미지로 반영
+            const stateSelect = document.getElementById("myState");
+            let imgUrl = stateSelect.options[stateSelect.selectedIndex].getAttribute('data-img');
+
+            if (exam === "before_exam") {
+                examText = "시험 직전 주간";
+                rate -= 15;
+            } else if (exam === "exam_day") {
+                examText = "🚨 시험 당일";
+                rate -= 35;
+                risk = "매우 높음";
+            }
+
+            if (mood === "angel") rate += 10;
+            if (mood === "bad" || mood === "suspicious") { rate -= 20; risk = "높음"; }
+            if (doc === "yes") { rate += 20; } else if (exam === "exam_day") { rate -= 25; }
+
+            rate = Math.min(Math.max(rate, 10), 98);
+
+            if (exam === "exam_day" && doc === "no") {
+                imgUrl = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80";
+                title = "❌ 위험! 증빙 없는 시험 당일 조퇴 금지";
+                desc = "<b>경고:</b> 증빙서류(진단서)가 없으면 인정 조퇴가 불가능하여 0점 처리될 수 있습니다.";
+                tip = "반드시 의사 진단서/진료확인서를 확보해야 합니다.";
+            } else if (state === "hospital") {
+                title = "🦷 사전 예약된 필수 병원 진료";
+                desc = "<b>추천 멘트:</b> '오늘 꼭 받아야 하는 병원 진료 예약이 있어 조퇴를 신청합니다.'";
+                tip = "예약 카톡 문자를 보여주면 승인 확률이 높아집니다.";
+            } else if (state === "urgent") {
+                title = "🔑 긴급 가사 및 방문 기사님 맞이";
+                desc = "<b>추천 멘트:</b> '집안 비상 상황(수도/열쇠)으로 조기 귀가가 필요한 상황입니다.'";
+                tip = "시간을 정확히 지정하여 최소한의 시간만 요청해보세요.";
+            } else if (state === "mental") {
+                title = "🌿 컨디션 관리 및 스트레스 완화";
+                desc = "<b>추천 멘트:</b> '스트레스로 인한 극심한 피로로 효율이 떨어집니다. 오늘 일찍 쉬어 가겠습니다.'";
+                tip = "단순 휴식보다는 신경성 통증 수식어를 덧붙이는 것이 좋습니다.";
+            } else if (state === "sick_acting") {
+                title = "🤢 급성 체기 및 두통 연기";
+                desc = "<b>추천 멘트:</b> '갑자기 속이 안 좋고 어지러워 수업/업무 진행이 어렵습니다.'";
+                tip = "관자놀이를 누르거나 이마를 짚으며 정중히 청해보세요.";
+            } else {
+                title = "🏥 정석 발열 및 신체 통증";
+                desc = "<b>추천 멘트:</b> '몸살 기운과 열이 있어 병원 진료 후 귀가하고자 합니다.'";
+                tip = "약 봉투나 병원 확인서를 꼭 챙기세요.";
+            }
+
+            document.getElementById("resultImg").src = imgUrl;
+            document.getElementById("rateBadge").innerText = "성공 확률 " + rate + "%";
+            document.getElementById("examBadge").innerText = "시즌: " + examText;
+            document.getElementById("riskBadge").innerText = "의심 위험도: " + risk;
+            document.getElementById("resultTitle").innerText = title;
+            document.getElementById("resultDesc").innerHTML = desc;
+            document.getElementById("resultTip").innerText = "💡 Tip: " + tip;
+
+            document.getElementById("resultBox").style.display = "block";
+        }
+    </script>
+</body>
+</html>
